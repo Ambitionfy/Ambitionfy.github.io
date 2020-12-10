@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Ambitionfy.github.io/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Ambitionfy.github.io/images/xingqiu32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/Ambitionfy.github.io/images/xingqiu16.png">
+  <link rel="mask-icon" href="/Ambitionfy.github.io/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/Ambitionfy.github.io/css/main.css">
+
+
+<link rel="stylesheet" href="/Ambitionfy.github.io/xxw/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/Ambitionfy.github.io/xxw/pace/pace-theme-minimal.min.css">
+  <script src="/Ambitionfy.github.io/xxw/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ambitionfy.github.io","root":"/Ambitionfy.github.io/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1.算法描述 计算已知训练集中各点距离该测试点距离（2-范数） 按照所得距离增序排列 选取前K个点 返回前K个点中出现频率最高的类别  2.代码实现12345678910111213141516171819202122232425262728293031323334353637383940414243def classify0(inX,dataSet,labels,k):  # inX：用于分类的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习一：K-近邻算法">
+<meta property="og:url" content="https://ambitionfy.github.io/2020/12/11/test1/index.html">
+<meta property="og:site_name" content="Lost Planet">
+<meta property="og:description" content="1.算法描述 计算已知训练集中各点距离该测试点距离（2-范数） 按照所得距离增序排列 选取前K个点 返回前K个点中出现频率最高的类别  2.代码实现12345678910111213141516171819202122232425262728293031323334353637383940414243def classify0(inX,dataSet,labels,k):  # inX：用于分类的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-10T16:05:06.000Z">
+<meta property="article:modified_time" content="2020-12-10T16:14:16.263Z">
+<meta property="article:author" content="房房爱学习">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://ambitionfy.github.io/2020/12/11/test1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>机器学习一：K-近邻算法 | Lost Planet</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/Ambitionfy.github.io/atom.xml" title="Lost Planet" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+        <a target="_blank" rel="noopener" href="https://github.com/Ambitionfy" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/Ambitionfy.github.io/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Lost Planet</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/Ambitionfy.github.io/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/Ambitionfy.github.io/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/Ambitionfy.github.io/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/Ambitionfy.github.io/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/Ambitionfy.github.io/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-resources">
+
+    <a href="/Ambitionfy.github.io/resources/" rel="section"><i class="download fa-fw"></i>资源</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ambitionfy.github.io/2020/12/11/test1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/Ambitionfy.github.io/images/douwei.jpg">
+      <meta itemprop="name" content="房房爱学习">
+      <meta itemprop="description" content="是的我看见到处是阳光">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lost Planet">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          机器学习一：K-近邻算法
+        </h1>
+
+        <div class="post-meta">
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-11 00:05:06 / 修改时间：00:14:16" itemprop="dateCreated datePublished" datetime="2020-12-11T00:05:06+08:00">2020-12-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/Ambitionfy.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="1-算法描述"><a href="#1-算法描述" class="headerlink" title="1.算法描述"></a>1.算法描述</h3><ol>
+<li>计算已知训练集中各点距离该测试点距离（2-范数）</li>
+<li>按照所得距离增序排列</li>
+<li>选取前K个点</li>
+<li>返回前K个点中出现频率最高的类别</li>
+</ol>
+<h3 id="2-代码实现"><a href="#2-代码实现" class="headerlink" title="2.代码实现"></a>2.代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">def classify0(inX,dataSet,labels,k):</span><br><span class="line"></span><br><span class="line">  # inX：用于分类的输入向量</span><br><span class="line"></span><br><span class="line">  # dataSet：输入的训练样本集，一行为一个样本</span><br><span class="line"></span><br><span class="line">  # labels：标签向量</span><br><span class="line"></span><br><span class="line">  # k：数目</span><br><span class="line"></span><br><span class="line">  dataSetSize &#x3D; dataSet.shape[0] # 获得行数，shape获得矩阵尺寸</span><br><span class="line"></span><br><span class="line">  diffMat &#x3D; tile(inX,(dataSetSize,1)) - dataSet # 纵向扩展</span><br><span class="line"></span><br><span class="line">  sqDiffMat &#x3D; diffMat**2</span><br><span class="line"></span><br><span class="line">  sqDistances &#x3D; sqDiffMat.sum(axis&#x3D;1) #行向量相加</span><br><span class="line"></span><br><span class="line">  distances &#x3D; sqDistances**0.5 #真实距离</span><br><span class="line"></span><br><span class="line">  sortedDistIndicies &#x3D; distances.argsort() # argsort：排序，并返回排序后元素排序前位置</span><br><span class="line"></span><br><span class="line">  classCount &#x3D; &#123;&#125;</span><br><span class="line"></span><br><span class="line">  for i in range(k):</span><br><span class="line"></span><br><span class="line">     voteIlabel &#x3D; labels[sortedDistIndicies[i]] # 找到前k个对应的标签</span><br><span class="line"></span><br><span class="line">     classCount[voteIlabel] &#x3D; classCount.get(voteIlabel,0) + 1</span><br><span class="line"></span><br><span class="line">     # 检索字典内对应的值，若不存在，则创建并将值设为0</span><br><span class="line"></span><br><span class="line">     # 通过+1来设定频率</span><br><span class="line"></span><br><span class="line">  sortedClassCount &#x3D; sorted(classCount.items(),</span><br><span class="line"></span><br><span class="line">                key&#x3D;operator.itemgetter(1),reverse &#x3D; True)</span><br><span class="line"></span><br><span class="line">  # 由于是字典格式，因此要用items转换为列表格式</span><br><span class="line"></span><br><span class="line">  # itemgetter：定义函数，获取第m位置上的值，用于key上，以实现对于频率的排序</span><br><span class="line"></span><br><span class="line">  return sortedClassCount[0][0]</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-实际应用"><a href="#3-实际应用" class="headerlink" title="3.实际应用"></a>3.实际应用</h3><h4 id="3-1-利用K-近邻算法改进约会网站配对效果"><a href="#3-1-利用K-近邻算法改进约会网站配对效果" class="headerlink" title="3.1 利用K-近邻算法改进约会网站配对效果"></a>3.1 利用K-近邻算法改进约会网站配对效果</h4><h5 id="3-1-1-目的：根据三种特征（每年获得的飞行常客里程数、玩视频游戏所消耗时间百分比、每周消费的冰淇淋公升数）来评判交往对象具有魅力的程度。"><a href="#3-1-1-目的：根据三种特征（每年获得的飞行常客里程数、玩视频游戏所消耗时间百分比、每周消费的冰淇淋公升数）来评判交往对象具有魅力的程度。" class="headerlink" title="3.1.1 目的：根据三种特征（每年获得的飞行常客里程数、玩视频游戏所消耗时间百分比、每周消费的冰淇淋公升数）来评判交往对象具有魅力的程度。"></a>3.1.1 目的：根据三种特征（每年获得的飞行常客里程数、玩视频游戏所消耗时间百分比、每周消费的冰淇淋公升数）来评判交往对象具有魅力的程度。</h5><h5 id="3-1-2-代码实现"><a href="#3-1-2-代码实现" class="headerlink" title="3.1.2 代码实现"></a>3.1.2 代码实现</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"># 利用K-近邻算法改进约会网站配对效果</span><br><span class="line">from numpy import *</span><br><span class="line">import operator</span><br><span class="line">import matplotlib</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from mpl_toolkits.mplot3d import Axes3D</span><br><span class="line">plt.rcParams[&#39;font.sans-serif&#39;]&#x3D;[&#39;SimHei&#39;]</span><br><span class="line">plt.rcParams[&#39;axes.unicode_minus&#39;] &#x3D; False</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def file2matrix(filename):</span><br><span class="line">    fr &#x3D; open(filename)</span><br><span class="line">    arrayOLines &#x3D; fr.readlines() # 读取所有行</span><br><span class="line">    numberOfLines &#x3D; len(arrayOLines) # 行数</span><br><span class="line">    returnMat &#x3D; zeros((numberOfLines,3))</span><br><span class="line">    classLabelVector &#x3D; []</span><br><span class="line">    index &#x3D; 0</span><br><span class="line">    for line in arrayOLines: # 依次读取</span><br><span class="line">        line &#x3D; line.strip() # 删除头尾字符</span><br><span class="line">        listFromLine &#x3D; line.split(&#39;\t&#39;) # 用\t分隔</span><br><span class="line">        returnMat[index,:] &#x3D; listFromLine[0:3] # 数据输入</span><br><span class="line">        classLabelVector.append(int(listFromLine[-1])) # 保存标签</span><br><span class="line">        index +&#x3D; 1</span><br><span class="line">    return returnMat,classLabelVector</span><br><span class="line"></span><br><span class="line">def autoNorm(dataSet):</span><br><span class="line">    minVals &#x3D; dataSet.min(0) # 0列 1行</span><br><span class="line">    maxVals &#x3D; dataSet.max(0)</span><br><span class="line">    ranges &#x3D; maxVals - minVals</span><br><span class="line">    normDataSet &#x3D; zeros(shape(dataSet))</span><br><span class="line">    m &#x3D; dataSet.shape[0] # 获取行数</span><br><span class="line">    normDataSet &#x3D; dataSet - tile(minVals,(m,1)) # 减去均值</span><br><span class="line">    normDataSet &#x3D; normDataSet&#x2F;tile(ranges,(m,1))</span><br><span class="line">    return normDataSet,ranges,minVals</span><br><span class="line"></span><br><span class="line">def classify0(inX,dataSet,labels,k):</span><br><span class="line">    # inX：用于分类的输入向量</span><br><span class="line">    # dataSet：输入的训练样本集，一行为一个样本</span><br><span class="line">    # labels：标签向量</span><br><span class="line">    # k：数目</span><br><span class="line">    dataSetSize &#x3D; dataSet.shape[0] # 获得行数，shape获得矩阵尺寸</span><br><span class="line">    diffMat &#x3D; tile(inX,(dataSetSize,1)) - dataSet # 纵向扩展</span><br><span class="line">    sqDiffMat &#x3D; diffMat**2</span><br><span class="line">    sqDistances &#x3D; sqDiffMat.sum(axis&#x3D;1) #行向量相加</span><br><span class="line">    distances &#x3D; sqDistances**0.5 #真实距离</span><br><span class="line">    sortedDistIndicies &#x3D; distances.argsort() # argsort：排序，并返回排序后元素排序前位置</span><br><span class="line">    classCount &#x3D; &#123;&#125;</span><br><span class="line">    for i in range(k):</span><br><span class="line">        voteIlabel &#x3D; labels[sortedDistIndicies[i]] # 找到前k个对应的标签</span><br><span class="line">        classCount[voteIlabel] &#x3D; classCount.get(voteIlabel,0) + 1</span><br><span class="line">        # 检索字典内对应的值，若不存在，则创建并将值设为0</span><br><span class="line">        # 通过+1来设定频率</span><br><span class="line">    sortedClassCount &#x3D; sorted(classCount.items(),</span><br><span class="line">                              key&#x3D;operator.itemgetter(1),reverse &#x3D; True)</span><br><span class="line">    # 由于是字典格式，因此要用items转换为列表格式</span><br><span class="line">    #itemgetter：定义函数，获取第m位置上的值，用于key上，以实现对于频率的排序</span><br><span class="line"></span><br><span class="line">    return sortedClassCount[0][0]</span><br><span class="line"></span><br><span class="line">def datingClassTest():</span><br><span class="line">    # 分类器针对约会网站的测试代码</span><br><span class="line">    hoRatio &#x3D; 0.10 # 测试数量占比</span><br><span class="line">    datingDataMat,classLabelVector &#x3D; file2matrix(&#39;1.txt&#39;)</span><br><span class="line">    normMat,ranges,minVals &#x3D; autoNorm(datingDataMat)</span><br><span class="line">    m &#x3D; normMat.shape[0]</span><br><span class="line">    numTestVecs &#x3D; int(m*hoRatio) # 测试数量</span><br><span class="line">    # 1:numTestVecs 用于测试</span><br><span class="line">    # numTestVecs:end 用于训练</span><br><span class="line">    errorCount &#x3D; 0</span><br><span class="line">    for i in range(numTestVecs):</span><br><span class="line">        classifierResult &#x3D; classify0(normMat[i,:],normMat[numTestVecs:m,:],classLabelVector[numTestVecs:m],3)</span><br><span class="line">        print(&#39;the classifier came back with:%d,the real answer is:%d&#39;%(classifierResult,classLabelVector[i]))</span><br><span class="line">        if (classifierResult !&#x3D; classLabelVector[i]):</span><br><span class="line">            errorCount +&#x3D; 1</span><br><span class="line">    print(&#39;the total error rate is :%f&#39;%(errorCount&#x2F;float(numTestVecs)))</span><br><span class="line"></span><br><span class="line">def classifyPerson():</span><br><span class="line">    # 预测函数</span><br><span class="line">    resultList &#x3D; [&#39;not at all&#39;,&#39;in small doses&#39;,&#39;in large doses&#39;]</span><br><span class="line">    percentTats &#x3D; float(input(&#39;percentage of time spent playing video games?&#39;))</span><br><span class="line">    ffMiles &#x3D; float(input(&#39;percentage flier miles earned per year?&#39;))</span><br><span class="line">    iceCream &#x3D; float(input(&#39;liters of ice cream consumed per year?&#39;))</span><br><span class="line">    datingDataMat,datingLabels &#x3D; file2matrix(&#39;1.txt&#39;)</span><br><span class="line">    normMat,ranges,minVals &#x3D; autoNorm(datingDataMat)</span><br><span class="line">    inArr &#x3D; array([ffMiles,percentTats,iceCream])</span><br><span class="line">    classifierResult &#x3D; classify0((inArr-minVals)&#x2F;ranges,normMat,datingLabels,3)</span><br><span class="line">    print(&#39;You will probably like this person:&#39;,resultList[classifierResult-1])</span><br><span class="line"></span><br><span class="line">def drawScatter():</span><br><span class="line">    [datingDataMat, classLabelVector] &#x3D; file2matrix(&#39;1.txt&#39;)</span><br><span class="line">    fig &#x3D; plt.figure()</span><br><span class="line">    ax &#x3D; fig.add_subplot(111)</span><br><span class="line">    plt.title(&quot;数据散点图&quot;)</span><br><span class="line">    plt.xlabel(&quot;每年获得的飞行常客里程数&quot;)</span><br><span class="line">    plt.ylabel(&quot;玩视频游戏所消耗时间百分比&quot;)</span><br><span class="line">    ax.scatter(datingDataMat[:, 0], datingDataMat[:, 1], 15.0 * array(classLabelVector),</span><br><span class="line">               15.0 * array(classLabelVector))  # 让标签来展示颜色和大小</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line"># datingClassTest()</span><br><span class="line"># drawScatter()</span><br><span class="line">classifyPerson()</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-2-利用K-近邻算法实现手写识别系统"><a href="#3-2-利用K-近邻算法实现手写识别系统" class="headerlink" title="3.2 利用K-近邻算法实现手写识别系统"></a>3.2 利用K-近邻算法实现手写识别系统</h4><h5 id="3-1-1-目的：识别手写体。"><a href="#3-1-1-目的：识别手写体。" class="headerlink" title="3.1.1 目的：识别手写体。"></a>3.1.1 目的：识别手写体。</h5><h5 id="3-1-2-代码实现-1"><a href="#3-1-2-代码实现-1" class="headerlink" title="3.1.2 代码实现"></a>3.1.2 代码实现</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"># 使用K-近邻算法实现手写识别系统</span><br><span class="line">from numpy import *</span><br><span class="line">import operator</span><br><span class="line">from os import listdir</span><br><span class="line"></span><br><span class="line">def img2vector(filename,n):</span><br><span class="line">    # 图像转化为向量</span><br><span class="line">    # n*n --&gt; 1*n^2</span><br><span class="line">    # 32*32 --&gt; 1*1024</span><br><span class="line">    returnVect &#x3D; zeros((1,n**2))</span><br><span class="line">    fr &#x3D; open(filename)</span><br><span class="line">    for i in range(n):</span><br><span class="line">        lineStr &#x3D; fr.readline() # 读取1行</span><br><span class="line">        for j in range(n):</span><br><span class="line">            returnVect[0,n*i+j] &#x3D; int(lineStr[j])</span><br><span class="line">    return returnVect</span><br><span class="line"></span><br><span class="line">def classify0(inX,dataSet,labels,k):</span><br><span class="line">    # inX：用于分类的输入向量</span><br><span class="line">    # dataSet：输入的训练样本集，一行为一个样本</span><br><span class="line">    # labels：标签向量</span><br><span class="line">    # k：数目</span><br><span class="line">    dataSetSize &#x3D; dataSet.shape[0] # 获得行数，shape获得矩阵尺寸</span><br><span class="line">    diffMat &#x3D; tile(inX,(dataSetSize,1)) - dataSet # 纵向扩展</span><br><span class="line">    sqDiffMat &#x3D; diffMat**2</span><br><span class="line">    sqDistances &#x3D; sqDiffMat.sum(axis&#x3D;1) #行向量相加</span><br><span class="line">    distances &#x3D; sqDistances**0.5 #真实距离</span><br><span class="line">    sortedDistIndicies &#x3D; distances.argsort() # argsort：排序，并返回排序后元素排序前位置</span><br><span class="line">    classCount &#x3D; &#123;&#125;</span><br><span class="line">    for i in range(k):</span><br><span class="line">        voteIlabel &#x3D; labels[sortedDistIndicies[i]] # 找到前k个对应的标签</span><br><span class="line">        classCount[voteIlabel] &#x3D; classCount.get(voteIlabel,0) + 1</span><br><span class="line">        # 检索字典内对应的值，若不存在，则创建并将值设为0</span><br><span class="line">        # 通过+1来设定频率</span><br><span class="line">    sortedClassCount &#x3D; sorted(classCount.items(),</span><br><span class="line">                              key&#x3D;operator.itemgetter(1),reverse &#x3D; True)</span><br><span class="line">    # 由于是字典格式，因此要用items转换为列表格式</span><br><span class="line">    #itemgetter：定义函数，获取第m位置上的值，用于key上，以实现对于频率的排序</span><br><span class="line"></span><br><span class="line">    return sortedClassCount[0][0]</span><br><span class="line"></span><br><span class="line">def handwritingClassTest(n):</span><br><span class="line">    # 获取训练样本</span><br><span class="line">    hwLabels &#x3D; []</span><br><span class="line">    trainingFileList &#x3D; listdir(&#39;digits&#x2F;trainingDigits&#39;)</span><br><span class="line">    m &#x3D; len(trainingFileList) # 文件个数</span><br><span class="line">    trainingMat &#x3D; zeros((m,n**2))</span><br><span class="line">    for i in range(m):</span><br><span class="line">        fileNameStr &#x3D; trainingFileList[i]</span><br><span class="line">        fliestr &#x3D; fileNameStr.split(&#39;.&#39;)[0] # 文件名</span><br><span class="line">        classNumStr &#x3D; int(fliestr.split(&#39;_&#39;)[0]) # 获取标签</span><br><span class="line">        hwLabels.append(classNumStr)</span><br><span class="line">        trainingMat[i,:] &#x3D; img2vector(&#39;digits&#x2F;trainingDigits&#x2F;%s&#39;%fileNameStr,32)# 存储特征</span><br><span class="line">    # 测试</span><br><span class="line">    testFileList &#x3D; listdir(&#39;digits&#x2F;testDigits&#39;)</span><br><span class="line">    errorCount &#x3D; 0</span><br><span class="line">    mTest &#x3D; len(testFileList)</span><br><span class="line">    for i in range(mTest):</span><br><span class="line">        fileNameStr &#x3D; testFileList[i]</span><br><span class="line">        fliestr &#x3D; fileNameStr.split(&#39;.&#39;)[0]  # 文件名</span><br><span class="line">        classNumStr &#x3D; int(fliestr.split(&#39;_&#39;)[0])  # 获取标签</span><br><span class="line">        vectorUnderTest &#x3D; img2vector(&#39;digits&#x2F;testDigits&#x2F;%s&#39; % fileNameStr, 32)</span><br><span class="line">        classifiterResult &#x3D; classify0(vectorUnderTest,trainingMat,hwLabels,3)</span><br><span class="line">        print(&#39;the classifier came back with :%d, the real answer is :%d&#39;%(classifiterResult,classNumStr))</span><br><span class="line">        if (classifiterResult!&#x3D; classNumStr):</span><br><span class="line">            errorCount +&#x3D; 1</span><br><span class="line">    print(&#39;the total number of error is %d&#39;%errorCount)</span><br><span class="line">    print(&#39;the total error tate is %f&#39;%(errorCount&#x2F;float(mTest)))</span><br><span class="line"></span><br><span class="line">x &#x3D; img2vector(&#39;digits&#x2F;trainingDigits&#x2F;0_1.txt&#39;,32)</span><br><span class="line">handwritingClassTest(32)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-注意事项"><a href="#4-注意事项" class="headerlink" title="4.注意事项"></a>4.注意事项</h3><p>K-近邻算法不以距离最近的点作为判断类别条件，而是选取一定范围内出现频率最高者</p>
+
+    </div>
+
+    
+    
+    
+
+     
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/Ambitionfy.github.io/tags/Python/" rel="tag"># Python</a>
+              <a href="/Ambitionfy.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MjE1NC8yODYzNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%AE%97%E6%B3%95%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">2.代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">3.实际应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E5%88%A9%E7%94%A8K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B%E7%BA%A6%E4%BC%9A%E7%BD%91%E7%AB%99%E9%85%8D%E5%AF%B9%E6%95%88%E6%9E%9C"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 利用K-近邻算法改进约会网站配对效果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1-%E7%9B%AE%E7%9A%84%EF%BC%9A%E6%A0%B9%E6%8D%AE%E4%B8%89%E7%A7%8D%E7%89%B9%E5%BE%81%EF%BC%88%E6%AF%8F%E5%B9%B4%E8%8E%B7%E5%BE%97%E7%9A%84%E9%A3%9E%E8%A1%8C%E5%B8%B8%E5%AE%A2%E9%87%8C%E7%A8%8B%E6%95%B0%E3%80%81%E7%8E%A9%E8%A7%86%E9%A2%91%E6%B8%B8%E6%88%8F%E6%89%80%E6%B6%88%E8%80%97%E6%97%B6%E9%97%B4%E7%99%BE%E5%88%86%E6%AF%94%E3%80%81%E6%AF%8F%E5%91%A8%E6%B6%88%E8%B4%B9%E7%9A%84%E5%86%B0%E6%B7%87%E6%B7%8B%E5%85%AC%E5%8D%87%E6%95%B0%EF%BC%89%E6%9D%A5%E8%AF%84%E5%88%A4%E4%BA%A4%E5%BE%80%E5%AF%B9%E8%B1%A1%E5%85%B7%E6%9C%89%E9%AD%85%E5%8A%9B%E7%9A%84%E7%A8%8B%E5%BA%A6%E3%80%82"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 目的：根据三种特征（每年获得的飞行常客里程数、玩视频游戏所消耗时间百分比、每周消费的冰淇淋公升数）来评判交往对象具有魅力的程度。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 代码实现</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E5%88%A9%E7%94%A8K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 利用K-近邻算法实现手写识别系统</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1-%E7%9B%AE%E7%9A%84%EF%BC%9A%E8%AF%86%E5%88%AB%E6%89%8B%E5%86%99%E4%BD%93%E3%80%82"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.1.1 目的：识别手写体。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.1.2 代码实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">4.</span> <span class="nav-text">4.注意事项</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="房房爱学习"
+      src="/Ambitionfy.github.io/images/douwei.jpg">
+  <p class="site-author-name" itemprop="name">房房爱学习</p>
+  <div class="site-description" itemprop="description">是的我看见到处是阳光</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/Ambitionfy.github.io/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/Ambitionfy.github.io/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/Ambitionfy.github.io/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Ambitionfy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Ambitionfy" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/5543462419" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;5543462419" rel="noopener" target="_blank"><i class="weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mp.csdn.net/console/article?spm=1010.2135.3001.5128" title="CSDN → https:&#x2F;&#x2F;mp.csdn.net&#x2F;console&#x2F;article?spm&#x3D;1010.2135.3001.5128" rel="noopener" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://bbs.uestc.edu.cn/home.php?mod=space&uid=232668" title="BBS → https:&#x2F;&#x2F;bbs.uestc.edu.cn&#x2F;home.php?mod&#x3D;space&amp;uid&#x3D;232668" rel="noopener" target="_blank"><i class="skype fa-fw"></i>BBS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; Thu Dec 10 2020 08:00:00 GMT+0800 (中国标准时间) – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">房房爱学习</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">7k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共1.8k字</span>
+</div>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/Ambitionfy.github.io/xxw/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/Ambitionfy.github.io/xxw/anime.min.js"></script>
+  <script src="/Ambitionfy.github.io/xxw/velocity/velocity.min.js"></script>
+  <script src="/Ambitionfy.github.io/xxw/velocity/velocity.ui.min.js"></script>
+
+<script src="/Ambitionfy.github.io/js/utils.js"></script>
+
+<script src="/Ambitionfy.github.io/js/motion.js"></script>
+
+
+<script src="/Ambitionfy.github.io/js/schemes/pisces.js"></script>
+
+
+<script src="/Ambitionfy.github.io/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
