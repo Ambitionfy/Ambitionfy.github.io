@@ -22,30 +22,34 @@
     var CONFIG = {"hostname":"ambitionfy.github.io","root":"/Ambitionfy.github.io/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="是的我看见到处是阳光">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lost Planet">
-<meta property="og:url" content="https://ambitionfy.github.io/index.html">
+  <meta name="description" content="1.算法描述 计算已知训练集中各点距离该测试点距离（2-范数） 按照所得距离增序排列 选取前K个点 返回前K个点中出现频率最高的类别  2.代码实现12345678910111213141516171819202122232425262728293031323334353637383940414243def classify0(inX,dataSet,labels,k):  # inX：用于分类的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习一：K-近邻算法">
+<meta property="og:url" content="https://ambitionfy.github.io/2020/12/11/test1/index.html">
 <meta property="og:site_name" content="Lost Planet">
-<meta property="og:description" content="是的我看见到处是阳光">
+<meta property="og:description" content="1.算法描述 计算已知训练集中各点距离该测试点距离（2-范数） 按照所得距离增序排列 选取前K个点 返回前K个点中出现频率最高的类别  2.代码实现12345678910111213141516171819202122232425262728293031323334353637383940414243def classify0(inX,dataSet,labels,k):  # inX：用于分类的">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-10T16:05:06.000Z">
+<meta property="article:modified_time" content="2020-12-10T16:14:16.263Z">
 <meta property="article:author" content="房房爱学习">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://ambitionfy.github.io/">
+<link rel="canonical" href="https://ambitionfy.github.io/2020/12/11/test1/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Lost Planet</title>
+  <title>机器学习一：K-近邻算法 | Lost Planet</title>
   
 
 
@@ -165,9 +169,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -183,10 +188,9 @@
       <meta itemprop="name" content="Lost Planet">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Ambitionfy.github.io/2020/12/11/test1/" class="post-title-link" itemprop="url">机器学习一：K-近邻算法</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          机器学习一：K-近邻算法
+        </h1>
 
         <div class="post-meta">
           
@@ -234,7 +238,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="1-算法描述"><a href="#1-算法描述" class="headerlink" title="1.算法描述"></a>1.算法描述</h3><ol>
+        <h3 id="1-算法描述"><a href="#1-算法描述" class="headerlink" title="1.算法描述"></a>1.算法描述</h3><ol>
 <li>计算已知训练集中各点距离该测试点距离（2-范数）</li>
 <li>按照所得距离增序排列</li>
 <li>选取前K个点</li>
@@ -250,7 +254,6 @@
 
 <h3 id="4-注意事项"><a href="#4-注意事项" class="headerlink" title="4.注意事项"></a>4.注意事项</h3><p>K-近邻算法不以距离最近的点作为判断类别条件，而是选取一定范围内出现频率最高者</p>
 
-      
     </div>
 
     
@@ -258,21 +261,33 @@
     
 
      
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          <div class="post-tags">
+              <a href="/Ambitionfy.github.io/tags/Python/" rel="tag"># Python</a>
+              <a href="/Ambitionfy.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
       </footer>
+    
   </article>
   
   
   
 
 
-  
-
-
 
           </div>
           
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MjE1NC8yODYzNA=="></div>
+  </div>
+  
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -319,6 +334,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%AE%97%E6%B3%95%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1.算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">2.代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">3.实际应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E5%88%A9%E7%94%A8K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95%E6%94%B9%E8%BF%9B%E7%BA%A6%E4%BC%9A%E7%BD%91%E7%AB%99%E9%85%8D%E5%AF%B9%E6%95%88%E6%9E%9C"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 利用K-近邻算法改进约会网站配对效果</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1-%E7%9B%AE%E7%9A%84%EF%BC%9A%E6%A0%B9%E6%8D%AE%E4%B8%89%E7%A7%8D%E7%89%B9%E5%BE%81%EF%BC%88%E6%AF%8F%E5%B9%B4%E8%8E%B7%E5%BE%97%E7%9A%84%E9%A3%9E%E8%A1%8C%E5%B8%B8%E5%AE%A2%E9%87%8C%E7%A8%8B%E6%95%B0%E3%80%81%E7%8E%A9%E8%A7%86%E9%A2%91%E6%B8%B8%E6%88%8F%E6%89%80%E6%B6%88%E8%80%97%E6%97%B6%E9%97%B4%E7%99%BE%E5%88%86%E6%AF%94%E3%80%81%E6%AF%8F%E5%91%A8%E6%B6%88%E8%B4%B9%E7%9A%84%E5%86%B0%E6%B7%87%E6%B7%8B%E5%85%AC%E5%8D%87%E6%95%B0%EF%BC%89%E6%9D%A5%E8%AF%84%E5%88%A4%E4%BA%A4%E5%BE%80%E5%AF%B9%E8%B1%A1%E5%85%B7%E6%9C%89%E9%AD%85%E5%8A%9B%E7%9A%84%E7%A8%8B%E5%BA%A6%E3%80%82"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 目的：根据三种特征（每年获得的飞行常客里程数、玩视频游戏所消耗时间百分比、每周消费的冰淇淋公升数）来评判交往对象具有魅力的程度。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 代码实现</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E5%88%A9%E7%94%A8K-%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 利用K-近邻算法实现手写识别系统</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1-%E7%9B%AE%E7%9A%84%EF%BC%9A%E8%AF%86%E5%88%AB%E6%89%8B%E5%86%99%E4%BD%93%E3%80%82"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.1.1 目的：识别手写体。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.1.2 代码实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">4.</span> <span class="nav-text">4.注意事项</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -468,6 +484,21 @@
 
   
 
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
 
 </body>
 </html>
